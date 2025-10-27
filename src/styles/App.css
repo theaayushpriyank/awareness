@@ -1,0 +1,154 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  box-sizing: border-box;
+}
+
+body{
+  width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  background-color: #FAFAFA;
+  border: 1px solid gray;
+  margin-left: 20rem;
+  padding: 1.125rem 1rem;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+.standard{
+  padding: 0.55rem 0.88rem;
+}
+
+/* layout */
+
+#entry-form{
+  margin-bottom: 1.5rem; 
+}
+
+#entry-form > div#row1 {
+  display: flex;
+  margin: 1.125rem 0;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+div#row1 > input {
+  width: 180px;
+  font-size: 0.875rem;
+  padding: 0.55rem 0.88rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+}
+
+div#row1 > button{
+  width: 125px;
+  text-align: center;
+  font-size: 0.85rem;
+}
+
+#entry-form > div#row2{
+  display:flex;
+  justify-content: space-between;
+  margin: 1.18125rem 0;
+}
+
+div#row2 > select{
+  width: 125px;
+  background-color: #F0EFEB;
+  border: 1px solid #D1D5DB;
+  padding: 0.55rem 0.4rem;
+  border-radius: 6px;
+} 
+
+div#row2> i{
+  font-size: 2rem;
+  color: #B3B3B3;
+}
+
+textarea {
+  resize: none;
+  background-color: #F0EFEB;
+  width: 100%;
+  height: 4.375rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  padding: 0.55rem 0.88rem;
+}
+
+#tabs-container{
+  display: flex;
+}
+
+#tabs-container>button{
+  flex-grow: 1;
+  background-color: #F0EFEB;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px 6px 0 0;
+  font-weight: 600;
+  border-bottom: none;
+}
+
+#overview-list{
+  background: #fafafa;
+  border: 1px solid #D9D9D9;
+  min-height: 80px;
+}
+
+.overview-item,
+section#summary-section>ul>li{
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 2rem;
+}
+section#summary-section>ul>li{
+  padding: 0.875rem 1rem;
+  background-color: #fff;
+  border-radius: 6px;
+  margin: 1.7rem 1rem;
+}
+
+section#summary-section>ul>li>.li-number{
+  color: #475467; 
+}
+
+.overview-item{
+  border-bottom: 1px solid #D1D5DB;
+}
+
+.li-number{
+  font-weight: 500;
+}
+
+div#overview-list>ul>li:last-child{
+  border-bottom: none;
+}
+
+section#summary-section{
+  background-color: #F0EFEB;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  margin: 2rem 0;
+}
+
+/* buttons */
+.primary{
+  background-color: #141413;
+  color: #FAFAF8;
+}
+
+#trxn-btn::before{
+  content: "+";
+  margin-right: 5px;
+}
+
+#tabs-container>.active-tab{
+  color: #475467;
+  background-color: #D9D9D9;
+}
