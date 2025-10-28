@@ -5,8 +5,22 @@
   box-sizing: border-box;
 }
 
+/* removing default date styling  */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+input[type="date"]::-moz-calendar-picker-indicator {
+  display: none;
+}
+input[type="date"]::-moz-inner-spin-button,
+input[type="date"]::-moz-clear {
+  display: none;
+}
+
+
 body{
-  width: 350px;
+  width: 360px;
   display: flex;
   justify-content: center;
   align-items: start;
@@ -58,16 +72,26 @@ div#row1 > button{
 }
 
 div#row2 > select{
-  width: 125px;
+  width: 100px;
+  display: flex;
+  align-self: center;
   background-color: #F0EFEB;
   border: 1px solid #D1D5DB;
   padding: 0.55rem 0.4rem;
   border-radius: 6px;
 } 
 
-div#row2> i{
+#date-input > label > i{
   font-size: 2rem;
   color: #B3B3B3;
+}
+
+#date-input > label > input {
+  background-color: #F0EFEB;
+  padding: 0.55rem 0.4rem;
+  font-family: inherit;
+  border-radius: 6px;
+  border: 1px solid #D1D5DB;
 }
 
 textarea {

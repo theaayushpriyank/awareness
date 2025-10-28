@@ -1,16 +1,19 @@
 import React from "react"
 import { login } from "./authService.js"
 import "./styles/Login.css"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
     
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const navigate = useNavigate()
 
     async function handleLogin() {
         try{
             await login(email, password)
             alert("Login successful!")
+            navigate("/")
         } catch(error){"Error", error.message}
     }
 

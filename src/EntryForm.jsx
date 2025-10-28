@@ -47,6 +47,7 @@ export default function EntryForm(props) {
        {unbudgetedOptionsArray}
      </>
   )
+
   const [trxnType, setTrxnType] = React.useState("expense") //use React from the drop down so that trxnSource is re-rendered upon change
 
   const trxnSource = trxnType === "expense" ? expensesOptionsArray : revenueOptionsArray
@@ -85,7 +86,17 @@ export default function EntryForm(props) {
             {trxnSource}
           </select> 
 
-          <i className="fa-regular fa-calendar"></i>
+          <div id="date-input">
+            <label style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              <input 
+                type="date"
+                name="trxnDate" 
+                defaultValue = {new Date().toISOString().split("T")[0]}/>
+              {/* <i className="fa-regular fa-calendar"></i> */}
+            </label>
+
+        </div>
+
         </div>
         <textarea defaultValue="-" name="trxnNote" id="trxnNote"/>
       </form>

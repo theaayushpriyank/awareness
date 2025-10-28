@@ -38,7 +38,7 @@ function App() {
     const revenue = snapshot.docs.map(doc => (
       {id: doc.id, ...doc.data()}
     ))
-    const orderedRevenue = revenue.sort((ab)=> b.id - a.id )
+    const orderedRevenue = revenue.sort((a,b)=> b.id - a.id )
     setRevenueList(orderedRevenue)} catch(error){console.log("Firestore fetch error:", error)}
   } 
   
