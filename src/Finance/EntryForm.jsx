@@ -1,24 +1,23 @@
 import React from 'react'
-import { db } from "./firebaseConfig.js"
+import { db } from "../firebase/firebaseConfig.js"
 import { doc, setDoc } from "firebase/firestore"
-import { useAuth } from "./authContext.jsx"
+import { useAuth } from "../firebase/authContext.jsx"
 
-import getDefaultArrays from './Components/DefaultArrays.jsx'
+import getDefaultFinanceOptions, {defaultFinances} from '../Components/DefaultArrays.jsx'
 
-export default function EntryForm(props) {
-  //get the default budget, unbudget, and revenue options 
-  const {budgetedOptionsArray, revenueOptionsArray, unbudgetedOptionsArray} = getDefaultArrays()
+export default function EntryForm(props) {   //get the default budget, unbudget, and revenue options 
+  const {budgetedOptionsArray, revenueOptionsArray, unbudgetedOptionsArray} = getDefaultFinanceOptions(defaultFinances)
 
   const { user } = useAuth()
 
-  //at form submit, push expenses and revenue to different functions
-  function entrySubmit(formData){
+  function entrySubmit(formData){ //at form submit, push expenses and revenue to different functions
 
     const data = Object.fromEntries(formData)
+    const displayDate = new Date(data.trxnDate).toLocaleDateString("en-GB")
     if (data.trxnType === "expense") {
-      addToExpenseList({...data, id: Date.now()}) //creating an id for each item in the expense list
+      addToExpenseList({...data, id: Date.now(), displayDate: displayDate}) //creating an id for each item in the expense list
     } else if (data.trxnType === "revenue") {
-      addToRevenueList({...data, id: Date.now()})
+      addToRevenueList({...data, id: Date.now(), displayDate: displayDate})
     }
     if(data.trxnSource === "Luxury"){
       props.setAvoidable(prev => Number(prev) + Number(data.trxnAmount))
@@ -26,8 +25,7 @@ export default function EntryForm(props) {
     setTrxnType("expense")
   }
 
-  //update expense list in state and cloud storage
-  async function addToExpenseList(data){
+  async function addToExpenseList(data){  //update expense list in state and cloud storage
     props.setExpenseList(prev => [data, ...prev])
     props.setBalance(prev => Number(prev) - Number(data.trxnAmount))
     await setDoc(doc(db, "users", user.uid, "expenses", String(data.id)), data)
@@ -91,11 +89,11 @@ export default function EntryForm(props) {
               <input 
                 type="date"
                 name="trxnDate" 
-                defaultValue = {new Date().toISOString().split("T")[0]}/>
-              {/* <i className="fa-regular fa-calendar"></i> */}
+                defaultValue = {props.date}
+                onChange = {(e) => props.setDate(new Date(e.target.value).toISOString().split("T")[0])}
+                />
             </label>
-
-        </div>
+          </div>
 
         </div>
         <textarea defaultValue="-" name="trxnNote" id="trxnNote"/>

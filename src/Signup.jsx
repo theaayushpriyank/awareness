@@ -1,4 +1,4 @@
-import { signup } from "./authService.js"
+import { signup } from "./firebase/authService.js"
 import React from "react"
 import "./styles/Login.css"
 

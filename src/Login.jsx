@@ -1,5 +1,5 @@
 import React from "react"
-import { login } from "./authService.js"
+import { login } from "./firebase/authService.js"
 import "./styles/Login.css"
 import { useNavigate } from "react-router-dom"
 

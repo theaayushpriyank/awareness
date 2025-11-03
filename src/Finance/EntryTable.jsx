@@ -1,20 +1,21 @@
 import React from 'react'
-import { db } from "./firebaseConfig.js"
-import { collection, doc, deleteDoc } from "firebase/firestore"
-import { useAuth } from "./authContext.jsx"
+import { db } from "../firebase/firebaseConfig.js"
+import { doc, deleteDoc } from "firebase/firestore"
+import { useAuth } from "../firebase/authContext.jsx"
 
-export default function EntryTable ({expenseList, revenueList, setExpenseList, setRevenueList, setAvoidable}){
+export default function EntryTable ({expenseList, revenueList, setExpenseList, setRevenueList, setAvoidable, monthYear, setMonthYear, date}){
 
+    
     const {user} = useAuth()
-
     const [selectedId, setSelectedId] = React.useState(null)
+    const [activeTab, setActiveTab] = React.useState("expenses-tab-btn")
 
     function handleEntryClick(entry) {
         setSelectedId(entry.id)
     }
-    // remove active tab when clicked outside the entry table
+    
     React.useEffect( () => {
-        function handleEmptyClick(e) {
+        function handleEmptyClick(e) { // remove active tab when clicked outside the entry table
             if(!e.target.closest(".overview-item")){
                 setSelectedId(null)
             }
@@ -26,8 +27,8 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
     const deleteExpenseOption = (entry) => {
         return (
         <p
-        style = {{color: "red"}}
-        onClick={() => deleteExpense(entry)}
+            style = {{color: "red"}}
+            onClick={() => deleteExpense(entry)}
         >Delete</p>
     )}
 
@@ -40,37 +41,34 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
         )
     }
 
-
-    const expenseEntries = expenseList.map(item => (
-        <li 
+    function generateEntries(list, deleteOption){ // convert transactions into an array of list items
+        return (list.map(item => <li 
             className= "overview-item" 
             key={item.id}
             onClick= {() => handleEntryClick(item)}
             style = {{backgroundColor: selectedId === item.id ? 'lightgray': "#fafafa"}} 
-        >
-            <span className="li-text"> {item.trxnSource} | {item.trxnNote} </span>
-            <span className="li-number">INR {item.trxnAmount}</span>
-            {item.id === selectedId && deleteExpenseOption(item)}
-        </li>
-    )
-    )
+        > 
+            <div className="overview-header">
+                <p> {item.trxnSource} | {item.trxnNote} </p>
+                <p className="li-number"> ₹{Number(item.trxnAmount)?.toLocaleString('en-IN')}</p>
+            </div>
+            {item.id === selectedId && <div className="overview-footer">
+                <p>{item.displayDate}</p>
+                { deleteOption(item)}
+            </div>}
+        </li>))
+    }
 
-    const revenueEntries = revenueList.map(item => (
-        <li 
-            className="overview-item"
-            key={item.id}
-            onClick= {()=> handleEntryClick(item)}
-            style = {{backgroundColor: selectedId === item.id ? 'lightgray': "#fafafa"}} 
-        >
-            <span className="li-text"> {item.trxnSource} | {item.trxnNote} </span>
-            <span className="li-number">INR {item.trxnAmount}</span>
-            {item.id===selectedId && deleteRevenueOption(item.id)}
-        </li>
-    ))
+    const expensesToday = expenseList.filter(expense => expense.trxnDate === date).sort((a,b) => b.trxnAmount - a.trxnAmount)
+    const totalExpensesToday = expenseList.filter(expense => expense.trxnDate === date).reduce((sum, expense) => sum + Number(expense.trxnAmount), 0)
+    const revenueThisMonth = revenueList.filter(revenue => revenue.trxnDate?.startsWith(monthYear))
+
+    const expenseEntries = generateEntries(expensesToday, deleteExpenseOption)
+    const revenueEntries = generateEntries(revenueThisMonth, deleteRevenueOption)
 
     const budgetEntries = []
 
-    const [activeTab, setActiveTab] = React.useState("expenses-tab-btn")
+  
     const tabs = [
         {id: "expenses-tab-btn", label: "Expenses", content: expenseEntries},
         {id: "revenue-tab-btn", label: "Revenue", content: revenueEntries},
@@ -90,8 +88,21 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
         setRevenueList(prev => prev.filter(rev => rev.id !== id))
     }
 
+    function MonthSelection() {
     return (
-    <section>
+    <div id="table-header">
+        <p>Expenses Today: ₹{totalExpensesToday}</p>
+        <input className="month-selection" 
+        type="month"
+        value={monthYear}
+        onChange={(e) => setMonthYear(e.target.value)}/>
+    </div>
+    )
+    }
+
+    return (
+        <section>
+        <MonthSelection />
         <div id="tabs-container">
             {tabs.map(tab => (
                 <button
@@ -99,8 +110,7 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
                     id= {tab.id} 
                     onClick = {() => {setActiveTab(tab.id)}}
                     className = {activeTab === tab.id ? "active-tab" : ""}
-                > {tab.label}
-                </button>
+                > {tab.label} </button>
             ))}
         </div>
         <div id="overview-list">

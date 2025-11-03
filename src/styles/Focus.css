@@ -1,0 +1,124 @@
+
+#focus-form{
+  padding: 1rem;
+}
+
+/* row 1 */
+
+#focus-row1 {
+  display: flex;
+  margin: 1.181rem 0;
+  gap: 1.5rem;
+  justify-content: space-between;
+}
+
+label {
+  display: flex;
+  gap: 1rem;
+}
+
+label > input {
+  border: none;
+  font-family: 'Helvetica', sans-serif;
+  background-color: inherit;
+  color: inherit;
+  text-align: center;
+}
+
+#sessionDate{
+    width: 60px;
+    border: none;
+    border-bottom: 0.5px solid #2d2363;
+    background-color: inherit;
+    font-family: inherit;
+}
+
+#focus-row2{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin: 1.18125rem 0;
+}
+
+#focus-row2 > select, 
+#focus-row2 > textarea{
+  display: flex;
+  align-self: center;
+  padding: 0.55rem 0.4rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  height: 2.26rem;
+} 
+
+#sessionDuration{
+  width: 50px;
+  border: 1px solid #dfdbf2;
+}
+
+#focus-row2 > select{
+  border: none;
+  background-color: inherit;
+}
+
+textarea {
+  resize: none;
+  background-color: #fff;
+}
+
+#focus-row4{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+#record-session{
+  margin-top: 0.3rem;
+  border: 1px solid #dfdbf2;
+  color: #fff;
+  background-color: #2d2363;
+  font-weight: 700;
+  border-radius: 6px;
+  font-size: 0.8rem;
+}
+
+#focus-table{
+  padding: 1rem;
+}
+
+.session-entry{
+  margin: 1rem 0;
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid #D1D5DB;
+}
+
+.entry-header{
+  color:#2d2363;
+  margin-bottom: 0.2rem;
+  font-weight: 700;
+  border-bottom: 1px solid #D1D5DB;
+  margin-bottom: 0.5rem;
+}
+
+.entry-description{
+  padding-bottom: 0.5rem;
+  white-space: pre-line;
+}
+
+.entry-footer{
+  color:#2d2363;
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-session{
+  text-decoration: underline;
+}
+
+.delete-session:hover{
+  color: #963232;
+  font-weight: 700;
+}
+
+
+

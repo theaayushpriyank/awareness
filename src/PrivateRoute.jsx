@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom"
-import { useAuth } from "./authContext.jsx"
+import { useAuth } from "./firebase/authContext.jsx"
 
 export default function PrivateRoute( {children} ) {
     const { user, loading } = useAuth()

@@ -58,3 +58,29 @@ Output:
 
  - Sort out the balance
  - Create a user login system 
+
+ # 30 Oct
+
+ - Create a work session section (design + basics)
+ - Set up conditional rendering
+
+ Process:
+ - Create a nav inside header
+ - Map through a const appSections and return an array of buttons
+ - When a button is clicked, the relevant section is to be rendered on the screen
+    - create state activeSection and set default to "Finances"
+    - clicking a button setsState to the name of the button
+    - under return part of App, use {activeTab === "finances" & <Finances /> }
+        - but this gets quite lengthy. a cleaner approach would be if I could scan through an array of objects, find the name that is passed as parameter upon click, and then content associated with that array. 
+
+Realised an issue - right now I'm sorting the entries by timestamp but that assumes the time of creation is the same as the actual event date. Implications:
+- for finance entries: If i log expenses of a previous day, it will still show up on the uploaded day if I rely on timestamp to filter. I don't need sequential transactions in finances, but I need them to be on the relevant day so I can generate accurate insights. So if i use dd/mm/yy (that's already selected by user) and add a random number (001, 002, 0003) on top of it, that should solve the issue. 
+- for focus entries: I want the exact timing, so I can generate useful insights around what time I generally work etc. Fortunately I am already collecting the specific start time and by the nature of it no two sessions will have the same start time. So if I take the user generated start time and sort according to that, I should be fine. 
+
+
+# 31 Oct 
+
+Session Objectives
+- Fix how time is calculated for both finances and focus
+- Render category totals for finances 
+
