@@ -14,7 +14,7 @@ export default function EntryForm(props) {   //get the default budget, unbudget,
 
     const data = Object.fromEntries(formData)
     const displayDate = new Date(data.trxnDate).toLocaleDateString("en-GB")
-    if (data.trxnType === "expense") {
+    if (data.trxnType === "expenses") {
       addToExpenseList({...data, id: Date.now(), displayDate: displayDate}) //creating an id for each item in the expense list
     } else if (data.trxnType === "revenue") {
       addToRevenueList({...data, id: Date.now(), displayDate: displayDate})
@@ -22,7 +22,7 @@ export default function EntryForm(props) {   //get the default budget, unbudget,
     if(data.trxnSource === "Luxury"){
       props.setAvoidable(prev => Number(prev) + Number(data.trxnAmount))
     }
-    setTrxnType("expense")
+    setTrxnType("expenses")
   }
 
   async function addToExpenseList(data){  //update expense list in state and cloud storage
@@ -46,9 +46,9 @@ export default function EntryForm(props) {   //get the default budget, unbudget,
      </>
   )
 
-  const [trxnType, setTrxnType] = React.useState("expense") //use React from the drop down so that trxnSource is re-rendered upon change
+  const [trxnType, setTrxnType] = React.useState("expenses") //use React from the drop down so that trxnSource is re-rendered upon change
 
-  const trxnSource = trxnType === "expense" ? expensesOptionsArray : revenueOptionsArray
+  const trxnSource = trxnType === "expenses" ? expensesOptionsArray : revenueOptionsArray
 
     return (
     <section id="form-section">
@@ -68,10 +68,10 @@ export default function EntryForm(props) {   //get the default budget, unbudget,
             required
             id="trxnType"
             name="trxnType"
-            defaultValue="Expense"
+            defaultValue="Expenses"
             onChange = {e => setTrxnType(e.target.value)}
           >
-            <option value="expense">Expense</option>
+            <option value="expenses">Expense</option>
             <option value="revenue">Revenue</option>
           </select>
 

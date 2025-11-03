@@ -16,32 +16,13 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
     
     React.useEffect( () => {
         function handleEmptyClick(e) { // remove active tab when clicked outside the entry table
-            if(!e.target.closest(".overview-item")){
-                setSelectedId(null)
-            }
+            if(!e.target.closest(".overview-item")){setSelectedId(null)}
         }
         document.addEventListener("click", handleEmptyClick)
         return () => document.removeEventListener("click", handleEmptyClick)
     }, [selectedId])
 
-    const deleteExpenseOption = (entry) => {
-        return (
-        <p
-            style = {{color: "red"}}
-            onClick={() => deleteExpense(entry)}
-        >Delete</p>
-    )}
-
-    const deleteRevenueOption = (id) => {
-        return (
-            <p
-            style = {{color: "red"}}
-            onClick = {() => deleteRevenue(id)}
-            >Delete</p>
-        )
-    }
-
-    function generateEntries(list, deleteOption){ // convert transactions into an array of list items
+    function generateEntries(list){ // converts transactions into an array of list items
         return (list.map(item => <li 
             className= "overview-item" 
             key={item.id}
@@ -54,7 +35,9 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
             </div>
             {item.id === selectedId && <div className="overview-footer">
                 <p>{item.displayDate}</p>
-                { deleteOption(item)}
+                <p 
+                    style = {{color: "red", cursor: "pointer"}}
+                    onClick={(e) => deleteTransaction(item)}>Delete</p>
             </div>}
         </li>))
     }
@@ -63,11 +46,10 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
     const totalExpensesToday = expenseList.filter(expense => expense.trxnDate === date).reduce((sum, expense) => sum + Number(expense.trxnAmount), 0)
     const revenueThisMonth = revenueList.filter(revenue => revenue.trxnDate?.startsWith(monthYear))
 
-    const expenseEntries = generateEntries(expensesToday, deleteExpenseOption)
-    const revenueEntries = generateEntries(revenueThisMonth, deleteRevenueOption)
+    const expenseEntries = generateEntries(expensesToday)
+    const revenueEntries = generateEntries(revenueThisMonth)
 
     const budgetEntries = []
-
   
     const tabs = [
         {id: "expenses-tab-btn", label: "Expenses", content: expenseEntries},
@@ -75,28 +57,26 @@ export default function EntryTable ({expenseList, revenueList, setExpenseList, s
         {id: "budget-tab-btn", label: "Budget", content: budgetEntries},
     ]
 
-    async function deleteExpense(entry) {
-        await deleteDoc(doc(db, "users", user.uid, "expenses", String(entry.id)))
-        setExpenseList(prev => prev.filter(exp => exp.id !== entry.id))
-        if(entry.trxnSource === "Luxury"){
-        setAvoidable(prev => Number(prev) - Number(entry.trxnAmount))
-    }
-    }
-
-    async function deleteRevenue(id){
-        await deleteDoc(doc(db, "users", user.uid, "revenue", String(id)))
-        setRevenueList(prev => prev.filter(rev => rev.id !== id))
-    }
+    async function deleteTransaction (entry) { //removes the entry from cloud storage
+        await deleteDoc(doc(db, "users", user.uid, entry.trxnType, String(entry.id)))
+        if (entry.trxnType === "expenses"){
+            setExpenseList(prev => prev.filter(exp=> exp.id !== entry.id))
+            if(entry.trxnSource === "Luxury"){
+            setAvoidable(prev => Number(prev) - Number(entry.trxnAmount))
+            }}
+        else if (entry.trxnType === "revenue"){
+            setRevenueList(prev => prev.filter(rev => rev.id !== entry.id))
+        }}
 
     function MonthSelection() {
     return (
-    <div id="table-header">
-        <p>Expenses Today: ₹{totalExpensesToday}</p>
-        <input className="month-selection" 
-        type="month"
-        value={monthYear}
-        onChange={(e) => setMonthYear(e.target.value)}/>
-    </div>
+        <div id="table-header">
+            <p>Expenses Today: ₹{totalExpensesToday}</p>
+            <input className="month-selection" 
+            type="month"
+            value={monthYear}
+            onChange={(e) => setMonthYear(e.target.value)}/>
+        </div>
     )
     }
 

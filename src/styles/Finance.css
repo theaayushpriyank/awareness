@@ -163,7 +163,7 @@ ul#summary-list{
   margin-right: 5px;
 }
 
-#tabs-container>.nav-tab{
+#tabs-container>.active-tab{
   color: #475467;
   background-color: #D9D9D9;
 }
