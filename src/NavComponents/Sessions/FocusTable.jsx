@@ -1,7 +1,6 @@
-import React from "react"
-import { useAuth } from "../firebase/authContext.jsx"
+import { useAuth } from "../../firebase/authContext.jsx"
 import { doc, deleteDoc, setDoc, getDocs} from "firebase/firestore"
-import { db } from "../firebase/firebaseConfig.js"
+import { db } from "../../firebase/firebaseConfig.js"
 
 export default function FocusTable({ allSessions, setAllSessions, date }){
     const {user, userData} = useAuth()

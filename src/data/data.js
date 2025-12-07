@@ -1,0 +1,27 @@
+export const optionsDatabase = [
+    {id: "1", type: "expenseSource", name: "Food", brief: "Food purchased online or offline"}, 
+    {id: "2", type: "expenseSource", name: "Accomodation", brief: "Rent and related utilities"}, 
+    {id: "3", type: "expenseSource", name: "Coffee", brief: ""},
+    {id: "4", type: "expenseSource", name: "Transport", brief: ""},
+    {id: "5", type: "expenseSource", name: "Meal prep", brief: "Ingredients & utensils"},
+    {id: "6", type: "expenseSource", name: "Debt", brief: "Loans, EMIs"},
+    {id: "7", type: "expenseSource", name: "Laundry", brief: ""},
+    {id: "8", type: "expenseSource", name: "Workspace", brief: "Coworking, personal workspace"},
+    {id: "9", type: "expenseSource", name: "Business", brief: ""},
+    {id: "10",type: "expenseSource", name: "Generosity", brief: "For family, friends, causes"},
+    {id: "11", type: "revenueSource", name: "Languify", brief: ""},
+    {id: "12", type: "revenueSource", name: "RocketRush", brief: ""},
+    {id: "13", type: "revenueSource", name: "DailyProtein", brief: ""},
+    {id: "14", type: "revenueSource", name: "Lumpsum", brief: ""},
+    {id: "15", type: "revenueSource", name: "Interest", brief: ""},
+    {id: "16", type: "revenueSource", name: "Cashback", brief: ""},
+    {id: "17", type: "sessionSource", name: "Daily Protein"}, 
+    {id: "18", type: "sessionSource", name: "Zettelkasten"},
+    {id: "19", type: "sessionSource", name: "App Development"}, 
+    {id: "20", type: "sessionSource", name: "Coding"},
+    {id: "21", type: "sessionSource", name: "Reading"},
+    {id: "22", type: "sessionSource", name: "RocketRush"},
+    {id: "23", type: "sessionSource", name: "Languify"},
+  ]
+
+export const lifestyleCost = 25000

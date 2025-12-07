@@ -1,17 +1,17 @@
 /* styling the entry form */
 
-#entry-form{
+.entry-form{
   margin-bottom: 1rem;
 }
 
-#entry-form > div#row1 {
+.entry-row1 {
   display: flex;
   margin-bottom: 1.125rem ;
   gap: 1.5rem;
   justify-content: space-between;
 }
 
-div#row1 > input {
+div.entry-row1 > input {
   width: 150px;
   font-size: 0.75rem;
   padding: 0.55rem 0.88rem;
@@ -19,19 +19,19 @@ div#row1 > input {
   border-radius: 6px;
 }
 
-div#row1 > button{
+button#add-record{
   width: 125px;
   text-align: center;
   font-size: 0.85rem;
 }
 
-#entry-form > div#row2{
+.entry-row2{
   display:flex;
   justify-content: space-between;
   margin: 1.18125rem 0;
 }
 
-div#row2 > select{
+.entry-row2 > select, .dropdown{
   width: 100px;
   display: flex;
   align-self: center;
@@ -41,12 +41,12 @@ div#row2 > select{
   border-radius: 6px;
 } 
 
-#date-input > label > i{
+.date-input > label > i{
   font-size: 2rem;
   color: #B3B3B3;
 }
 
-#date-input > label > input {
+.date-input > label > input {
   background-color: #F0EFEB;
   padding: 0.55rem 0.4rem;
   font-family: inherit;
@@ -77,14 +77,15 @@ textarea {
 
 .month-selection{
   border: none;
+  background-color: inherit;
 }
 
 
-#tabs-container{
+.tabs-container{
   display: flex;
 }
 
-#tabs-container>button{
+.tabs-container>button{
   flex-grow: 1;
   background-color: #F0EFEB;
   border: 1px solid #D1D5DB;
@@ -93,7 +94,7 @@ textarea {
   border-bottom: none;
 }
 
-#overview-list{
+.overview-list{
   background: #fafafa;
   border: 1px solid #D9D9D9;
   min-height: 100px;
@@ -105,9 +106,10 @@ li.overview-item{
   flex-direction: column;
   gap: 0.5rem;
   padding: 0.7rem 1rem;
+  cursor: pointer;
 }
 
-div.overview-header{
+div.financeEntry-header{
   display: flex;
   justify-content: space-between;
 }
@@ -124,8 +126,14 @@ p.li-number{
   text-align: right;
 }
 
-div#overview-list>li:last-child{
+div.overview-list>li:last-child{
   border-bottom: none;
+}
+
+#updateBtn{
+  border: 1px solid green;
+  background-color: #C1F5C1;
+
 }
 
 /* styling the summary section */
@@ -163,7 +171,7 @@ ul#summary-list{
   margin-right: 5px;
 }
 
-#tabs-container>.active-tab{
+.tabs-container>.active-tab{
   color: #475467;
   background-color: #D9D9D9;
 }
@@ -197,4 +205,34 @@ ul#summary-list{
 
 .metric-content>li:last-child{
   border-bottom: none;
+}
+
+/* Account Section Styling */
+
+.option-form{
+  display: flex;
+  flex-direction: column;
+  padding: 0.4rem;
+  gap: 0.5rem;
+}
+
+
+.option-form > .optionRow1 > input,
+.optionRow2 > input {
+  width: 60%;
+  border: 1px solid #D9D9D9;
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+
+.optionRow3 {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.optionRow3 > select {
+  width: 40%;
+  border: 1px dotted #D9D9D9;
+  background-color: inherit;
+
 }

@@ -1,8 +1,8 @@
-import { getCategoryTransactionsByMonth } from "../calculations.js"
+import { getCategoryTransactionsByMonth } from "../../calculations.js"
 
-export default function FinanceMetrics(props) {
+export default function FinanceMetrics({trxnList, financeForm}) {
 
-const categoryExpensesByMonth = getCategoryTransactionsByMonth(props.expenseList, props.monthYear)
+const categoryExpensesByMonth = getCategoryTransactionsByMonth(trxnList.expenseList, financeForm.monthYear)
 
 const categoryList = categoryExpensesByMonth.sort((a,b) => b.total - a.total).map(obj => (
     <li key={obj.category}>

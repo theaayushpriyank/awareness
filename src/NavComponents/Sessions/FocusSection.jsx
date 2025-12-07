@@ -1,13 +1,14 @@
-import "../styles/Focus.css"
-import {defaultFocus, getDefaultFocusOptions} from "../Components/DefaultArrays.jsx"
-import { useAuth } from "../firebase/authContext.jsx"
+import "../../styles/Focus.css"
+import { useAuth } from "../../firebase/authContext.jsx"
 import { collection, doc, deleteDoc, setDoc, getDocs} from "firebase/firestore"
-import { db } from "../firebase/firebaseConfig.js"
-import FocusTable from "./FocusTable"
+import { db } from "../../firebase/firebaseConfig.js"
+import FocusTable from "./FocusTable.jsx"
 import React from "react"
 
-export default function FocusSection() {
-    const focusOptions = getDefaultFocusOptions(defaultFocus)
+export default function FocusSection({ optionsList }) {
+
+    const sessionSource = optionsList?.filter(option => option.type === "sessionSource")
+    const focusOptionsArray = sessionSource.map(obj => <option key={obj.name} value={obj.name}>{obj.name}</option>)
     const { user } = useAuth()
     
     const [allSessions, setAllSessions] = React.useState([])
@@ -59,7 +60,7 @@ export default function FocusSection() {
                     required
                     name="sessionTarget"
                     id="sessionTarget">
-                    {focusOptions}
+                    {focusOptionsArray}
                 </select>
             </div>
             <div>

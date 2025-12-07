@@ -84,3 +84,60 @@ Session Objectives
 - Fix how time is calculated for both finances and focus
 - Render category totals for finances 
 
+# 14 Nov 
+
+[18.10 - ]
+
+- Remove the budgeted and unbudgeted distinction [20 mins]
+- Add an optional description section for each source
+- Add edit option for entries [1.5+ hours, still unfinished]
+- Fix luxury calculation [scans text for keyword and includes relevant items to luxury spend calculation]
+- Fix runway calculation [2 mins]
+
+
+What is the objective of luxury?  {replace it with indulgence}
+- Become aware of how much I spent on things that were not necessary for lifestyle maintenance.
+- Do I want to be an expense category or do I want it to be a separate datapoint
+    - if i make it an expense category, I will not be able to add it to other expense categories (ex- a category of books, or a category of food, or such). Especially in the context of eating out or other such purchases, it will be useful to know which actual category am I indulging in.  
+    - adding a dropdown for this will involve UI changes, see if I can check traxn note for "#indulgence" or "#luxury" and identify these kind of transactions. 
+
+
+# 15 Nov 
+[14.40 -21.30 ]
+
+- Edit option finalised []
+
+15.30: Replaced manual inputs with a function that takes the input name, finds the object with that data, and uses that data to render the input.
+
+16.00: Moved the userSideData function to a separate component and most things are working except date isn't changing (since it was passed in the function rather than as props)
+
+20.00 edit option works properly with acceptable UI - need to set this up for revenue as well + make date button functional again
+
+21.30 date button is functional again + revenue edits work as well
+
+
+
+# 17 Nov 
+[08.35 - 11.30 ]
+
+
+
+//to build 
+
+- User can change defaults 
+- Nutrition section layout 
+- Merge Entry Form & Entry Table sections
+- AI connect setup
+
+- created financeOptions in state, created function to update state with value in cloud. 
+- push value to cloud whenever edited or changed.
+
+
+# 1 Dec
+
+- what do I know about this bug?
+    - when financeState changes, App ends up creating a new FinanceApp element [making dependency array of useEffect ineffective]
+    - when the financeApp is rendered directly in App's return, this issue does not happen.
+    - when the useEffect is called inside the App itself, this issue does not happen.
+
+- there seems a disadvantage of creating one big state and having all others as keys inside it: changing any of the items leads to re-renders everywhere - even where it's not required. 

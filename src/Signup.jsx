@@ -1,4 +1,4 @@
-import { signup } from "./firebase/authService.js"
+import { signup, login } from "./firebase/authService.js"
 import React from "react"
 import "./styles/Login.css"
 
@@ -8,12 +8,10 @@ export default function Signup() {
     const [password, setPassword] = React.useState('')
 
     async function handleSignup() {
-        console.log("Handle signup!")
         try{
             await signup(email, password)
-            alert("Signup successful!")
+            alert("Signup successful, creating your account!")
         }catch(error){"Error in signing up:", error.message}
-    
     }
 
     return (

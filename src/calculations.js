@@ -1,11 +1,4 @@
 
-export function getFinanceMetrics(transactions, monthYear, category) {
-    const transactionsByCategory = getTransactionsByCategory(transactions) //all transactions till date on a given category
-    const transactionsByMonth = getTransactionsByMonth(transactions, monthYear) //all transactions in a given month
-    const categoryTransactionsByMonth = getCategoryTransactionsByMonth(transactions, monthYear) //monthly transactions in each category
-    return { transactionsByCategory, transactionsByMonth, categoryTransactionsByMonth }
-}
-
 export function getTransactionsByCategory(transactions) {
         const categoryTotals = transactions.reduce((sum, transaction) => {
         sum[transaction.trxnSource] = (sum[transaction.trxnSource] || 0) + Number(transaction.trxnAmount)
@@ -27,3 +20,4 @@ export function getCategoryTransactionsByMonth(transactionList, monthYear) {
         const categoryTransactionsThisMonth = getTransactionsByCategory(transactionsByMonth)
         return categoryTransactionsThisMonth  //an array of objects, {category, total, transactions}
 }
+

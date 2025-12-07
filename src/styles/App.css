@@ -27,14 +27,12 @@ nav {
 }
 
 header {
-  min-width: 320px;
 }
 
 body{
-  width: 360px;
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   background-color: #FAFAFA;
   border: 1px solid gray;
   margin-left: 20rem;
